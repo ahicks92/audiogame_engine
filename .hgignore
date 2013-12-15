@@ -1,0 +1,8 @@
+syntax: glob
+*.pyc
+*.dll
+__pycache__
+dist
+build
+release
+game_engine.egg-info
