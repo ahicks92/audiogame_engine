@@ -1,4 +1,4 @@
-from sdl2 import * #there are a lot of constants that already start with SDL_
+import sdl2
 import sdl2.ext
 import time
 import atexit # a convenient way to deinitialize SDL
@@ -22,12 +22,12 @@ class MainLoop(object):
 
 :param tick_speed: How often to tick.
 """
-		self._window = SDL_CreateWindow(self._title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, self._size[0], self._size[1], SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIDDEN)
-		self._renderer = SDL_CreateRenderer(self._window, -1, 0)
+		self._window = sdl2.SDL_CreateWindow(self._title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, self._size[0], self._size[1], SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIDDEN)
+		self._renderer = sdl2.SDL_CreateRenderer(self._window, -1, 0)
 		self._running = True
 		delta = 0 #used to record the time it takes the loop to run.
-		SDL_ShowWindow(self._window)
-		SDL_SetRelativeMouseMode(True)
+		sdl2.SDL_ShowWindow(self._window)
+		sdl2.SDL_SetRelativeMouseMode(True)
 		while(self._running):
 			start_time = time.time()
 			self._event_responder.tick(delta) #time since the last time tick was called.  This should always be very close to tick_speed.  If the loop takes longer to run than tick_speed, this will increase accordingly.
@@ -47,16 +47,16 @@ class MainLoop(object):
 					self._event_responder.mouse_button_up(event.button)
 			end_time = time.time()
 			processing_time = end_time-start_time
-			SDL_RenderPresent(self._renderer)
-			SDL_SetRenderDrawColor(self._renderer, 0, 0, 0, 255)
-			SDL_RenderClear(self._renderer)
+			sdl2.SDL_RenderPresent(self._renderer)
+			sdl2.SDL_SetRenderDrawColor(self._renderer, 0, 0, 0, 255)
+			sdl2.SDL_RenderClear(self._renderer)
 			#this lets us see the framerate.
-			SDL_SetWindowTitle(self._window, self._title + " " + str( 1 / delta if delta > 0 else 0))
+			sdl2.SDL_SetWindowTitle(self._window, self._title + " " + str( 1 / delta if delta > 0 else 0))
 			if tick_speed - processing_time >= 0:
 				time.sleep(tick_speed-processing_time)
 			delta = time.time()-start_time
-		SDL_DestroyRenderer(self._renderer)
-		SDL_DestroyWindow(self._window)
+		sdl2.SDL_DestroyRenderer(self._renderer)
+		sdl2.SDL_DestroyWindow(self._window)
 
 	def quit(self, should_notify_responder = True):
 		"""Stops the game loop.
