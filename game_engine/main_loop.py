@@ -22,7 +22,7 @@ class MainLoop(object):
 
 :param tick_speed: How often to tick.
 """
-		self._window = sdl2.SDL_CreateWindow(self._title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, self._size[0], self._size[1], SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIDDEN)
+		self._window = sdl2.SDL_CreateWindow(self._title, sdl2.SDL_WINDOWPOS_CENTERED, sdl2.SDL_WINDOWPOS_CENTERED, self._size[0], self._size[1], sdl2.SDL_WINDOW_RESIZABLE | sdl2.SDL_WINDOW_HIDDEN)
 		self._renderer = sdl2.SDL_CreateRenderer(self._window, -1, 0)
 		self._running = True
 		delta = 0 #used to record the time it takes the loop to run.
@@ -33,17 +33,17 @@ class MainLoop(object):
 			self._event_responder.tick(delta) #time since the last time tick was called.  This should always be very close to tick_speed.  If the loop takes longer to run than tick_speed, this will increase accordingly.
 			events = sdl2.ext.get_events()
 			for event in events:
-				if event.type == SDL_QUIT:
+				if event.type == sdl2.SDL_QUIT:
 					self.quit() #this is responsible for handling quitting.  No need to do anything else.
-				elif event.type == SDL_KEYDOWN:
+				elif event.type == sdl2.SDL_KEYDOWN:
 					self._event_responder.key_down(event.key)
-				elif event.type == SDL_KEYUP:
+				elif event.type == sdl2.SDL_KEYUP:
 					self._event_responder.key_up(event.key)
-				elif event.type == SDL_MOUSEMOTION:
+				elif event.type == sdl2.SDL_MOUSEMOTION:
 					self._event_responder.mouse_move(event.motion.xrel, event.motion.yrel)
-				elif event.type == SDL_MOUSEBUTTONDOWN:
+				elif event.type == sdl2.SDL_MOUSEBUTTONDOWN:
 					self._event_responder.mouse_button_down(event.button)
-				elif event.type == SDL_MOUSEBUTTONUP:
+				elif event.type == sdl2.SDL_MOUSEBUTTONUP:
 					self._event_responder.mouse_button_up(event.button)
 			end_time = time.time()
 			processing_time = end_time-start_time
