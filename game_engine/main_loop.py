@@ -16,6 +16,7 @@ class MainLoop(object):
 		self._size = size
 		self._event_responder = event_responder
 		self._event_responder.set_associated_loop(self)
+		self.call_after_list = []
 
 	def run(self, tick_speed = 1/60.0):
 		"""Runs the game loop.
@@ -45,18 +46,23 @@ class MainLoop(object):
 					self._event_responder.mouse_button_down(event.button)
 				elif event.type == sdl2.SDL_MOUSEBUTTONUP:
 					self._event_responder.mouse_button_up(event.button)
-			end_time = time.time()
-			processing_time = end_time-start_time
 			sdl2.SDL_RenderPresent(self._renderer)
 			sdl2.SDL_SetRenderDrawColor(self._renderer, 0, 0, 0, 255)
 			sdl2.SDL_RenderClear(self._renderer)
 			#this lets us see the framerate.
 			sdl2.SDL_SetWindowTitle(self._window, self._title + " " + str( 1 / delta if delta > 0 else 0))
+			for callable in self.call_after_list:
+				callable()
+			end_time = time.time()
+			processing_time = end_time-start_time
 			if tick_speed - processing_time >= 0:
 				time.sleep(tick_speed-processing_time)
 			delta = time.time()-start_time
 		sdl2.SDL_DestroyRenderer(self._renderer)
 		sdl2.SDL_DestroyWindow(self._window)
+	def call_after(self, callable):
+		"""For integrating with foreign event loops, namely twisted.  Callable will be called after the next tick."""
+		self.call_after_list.append(callable)
 
 	def quit(self, should_notify_responder = True):
 		"""Stops the game loop.
