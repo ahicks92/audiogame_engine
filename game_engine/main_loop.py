@@ -23,7 +23,7 @@ class MainLoop(object):
 
 :param tick_speed: How often to tick.
 """
-		self._window = sdl2.SDL_CreateWindow(self._title, sdl2.SDL_WINDOWPOS_CENTERED, sdl2.SDL_WINDOWPOS_CENTERED, self._size[0], self._size[1], sdl2.SDL_WINDOW_RESIZABLE | sdl2.SDL_WINDOW_HIDDEN)
+		self._window = sdl2.SDL_CreateWindow(self._title, sdl2.SDL_WINDOWPOS_CENTERED, sdl2.SDL_WINDOWPOS_CENTERED, self._size[0], self._size[1], sdl2.SDL_WINDOW_RESIZABLE | sdl2.SDL_WINDOW_BORDERLESS)
 		self._renderer = sdl2.SDL_CreateRenderer(self._window, -1, 0)
 		self._running = True
 		delta = 0 #used to record the time it takes the loop to run.
