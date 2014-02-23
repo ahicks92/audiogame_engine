@@ -51,6 +51,26 @@ Exactly one keyup event will be generated for each key release.
 """
 		self.keyheld_map[sdl_key(key)] = start, end
 
+	def register_keyheld_attribute(self, key, object, attribute_name, when_down, after_release):
+		"""Supports basic attribute toggling on key presses.
+
+:param key:  The key that toggles the attribute.
+:param object: The object on which the attribute is found.
+:param attribute_name: The name of the attribute, as a string.
+:param when_down: The value the attribute is to be set to when the key is held.
+:param after_release: The value the attribute is to be set to when the key is released.
+"""
+		attribinfo = (object, attribute_name, when_down, after_release)
+		self.keyheld_attribute_map[sdl_key(key)] = attribinfo
+
+	def unregister_keyheld_attribute(self, key):
+		"""Unregisters the attribute that is controlled by key.
+
+:param key: A previously registered key registered with register_keyheld_attribute.
+"""
+		key = sdl_key(key)
+		del self.keyheld_attribute_map[key]
+
 	def process_keydown(self, key):
 		key = key.keysym
 		symbol = key.sym
@@ -59,7 +79,7 @@ Exactly one keyup event will be generated for each key release.
 		if symbol in self.keyheld_map and symbol not in self.held_keys:
 			self.keyheld_map[symbol][0](list_modifiers(key))
 			self.held_keys.add(symbol)
-		if (symbol, modifiers) in self.keyheld_attribute_map:
+		if symbol in self.keyheld_attribute_map:
 			attribinfo = self.keyheld_attribute_map[(symbol, modifiers)]
 			object = attribinfo[00]
 			name = attribinfo[1]
@@ -74,8 +94,8 @@ Exactly one keyup event will be generated for each key release.
 		if symbol in self.keyheld_map and symbol in self.held_keys:
 			self.keyheld_map[symbol][1](list_modifiers(key))
 			self.held_keys.remove(symbol)
-		if (symbol, modifiers) in self.keyheld_attribute_map:
-			attribinfo = self.keyheld_attribute_map[(symbol, modifiers)]
+		if symbol in self.keyheld_attribute_map:
+			attribinfo = self.keyheld_attribute_map[symbol]
 			object = attribinfo[0]
 			name = attribinfo[1]
 			value = attribinfo[3]
