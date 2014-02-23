@@ -80,7 +80,7 @@ Exactly one keyup event will be generated for each key release.
 			self.keyheld_map[symbol][0](list_modifiers(key))
 			self.held_keys.add(symbol)
 		if symbol in self.keyheld_attribute_map:
-			attribinfo = self.keyheld_attribute_map[(symbol, modifiers)]
+			attribinfo = self.keyheld_attribute_map[symbol]
 			object = attribinfo[00]
 			name = attribinfo[1]
 			value = attribinfo[2]
