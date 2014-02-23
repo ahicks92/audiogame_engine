@@ -21,6 +21,7 @@ class KeyboardHandler(object):
 		self.keyup_map = {}
 		self.keyheld_map = {}
 		self.held_keys = set()
+		self.keyheld_attribute_map = {}
 
 	def register_keydown(self, key, function):
 		"""registers a function to be called when a keydown event is received and the key is keycode.
@@ -58,6 +59,12 @@ Exactly one keyup event will be generated for each key release.
 		if symbol in self.keyheld_map and symbol not in self.held_keys:
 			self.keyheld_map[symbol][0](list_modifiers(key))
 			self.held_keys.add(symbol)
+		if (symbol, modifiers) in self.keyheld_attribute_map:
+			attribinfo = self.keyheld_attribute_map[(symbol, modifiers)]
+			object = attribinfo[00]
+			name = attribinfo[1]
+			value = attribinfo[2]
+			setattr(object, name, value)
 
 	def process_keyup(self, key):
 		key = key.keysym
@@ -67,3 +74,9 @@ Exactly one keyup event will be generated for each key release.
 		if symbol in self.keyheld_map and symbol in self.held_keys:
 			self.keyheld_map[symbol][1](list_modifiers(key))
 			self.held_keys.remove(symbol)
+		if (symbol, modifiers) in self.keyheld_attribute_map:
+			attribinfo = self.keyheld_attribute_map[(symbol, modifiers)]
+			object = attribinfo[0]
+			name = attribinfo[1]
+			value = attribinfo[3]
+			setattr(object, name, value)
