@@ -9,5 +9,8 @@ setup(
  description = """A basic game event loop and window""",
  package_dir = {'game_engine': 'game_engine'},
  packages = find_packages(),
-	zip_safe = False
+	zip_safe = False,
+	package_data = {
+'game_engine' : ['dlls/*.dll']
+}
 )

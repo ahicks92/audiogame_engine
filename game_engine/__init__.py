@@ -1,7 +1,3 @@
-from .event_responder import *
-from .main_loop import *
-from .screen import *
-from .screen_stack import *
 import atexit
 
 # If this is imported, it needs to init SDL, and sdl must only ever be initialized once.
@@ -20,3 +16,8 @@ def find_datafiles():
 	dll_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'dlls')
 	dll_files = glob.glob(os.path.join(dll_path, '*'))
 	return ('dlls', dll_files)
+
+from .event_responder import *
+from .main_loop import *
+from .screen import *
+from .screen_stack import *
