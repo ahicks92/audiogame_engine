@@ -8,7 +8,7 @@ class MainLoop(object):
 
 	def __init__(self, event_responder, title="untitled", size=(800, 600)):
 		"""Initialize the GameLoop.
-:param event_responder:  Any object meeting the GameEventResponder interface.  This object shall be notified of SDL events.
+:param event_responder:  Any object meeting the GameEventResponder interface.  This object shall be notified of SDL events.  You probably want to use a ScreenStack, but anything meeting the EventResponder interface will work.
 :param title: The title of the window this game loop creates when run.
 :param size: the size of the window.
 """
@@ -19,7 +19,7 @@ class MainLoop(object):
 		self.call_after_list = []
 
 	def run(self, tick_speed = 1/60.0):
-		"""Runs the game loop.
+		"""Runs the game loop.  This method will block until such time as the game is exited.  All of your logic needs to be in the EventResponder instance.  99% of the time, this should be a ScreenStack with the first screen of your game pushed onto it.  Note that the delta parameter of the tick method on your EventResponder gets 0 for the first tick.
 
 :param tick_speed: How often to tick.
 """
