@@ -1,8 +1,0 @@
-syntax: glob
-*.pyc
-*.dll
-__pycache__
-dist
-build
-release
-audiogame_engine.egg-info

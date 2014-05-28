@@ -1,0 +1,5 @@
+*.pyc
+*.dll
+audiogame_engine.egg-info
+build/
+dist/
