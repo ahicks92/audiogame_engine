@@ -2,13 +2,18 @@ import sdl2
 
 #this really does have to b written like this. There are other constants with the prefix SDL_BUTTON that aren't mouse buttons.
 def sdl_mouse(button):
-	utton = button.lower()
+	button = button.lower()
 	if button == 'left': return sdl2.SDL_BUTTON_LEFT
 	elif button == 'right': return sdl2.SDL_BUTTON_RIGHT
 	elif button == 'middle': return SDL2.SDL_BUTTON_MIDDLE
 	else: raise KeyError("Button %s not found" % button)
 
 class MouseHandler(object):
+	"""Use this class to be notified about mouse events.  Inheriting from Screen gives you one for free.
+
+recognized mouse buttons are 'left', 'middle', and 'right'.
+
+Actual mouse movements needs to be done by overriding mouse_move on the Screen.  This class does not handle it."""
 
 	def __init__(self):
 		self.pressed = set()

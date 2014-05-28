@@ -9,6 +9,8 @@ All methods from the GameEventResponder interface should either return True or F
 if they return False and the property should_propagate is True, the parent screen also gets  a chance to process the event.  This also holds true for tick--it is trivial to make menus that allow gameplay to continue by returning true for the menu keystrokes but false for the tick.  Should_propagate is False by default.
 
 All of the default implementations provided here return false.
+
+Note that all screens have a keyboard_handler and a mouse_handler.  This allows one to easily hook up controls and have them appear/disappear with screens.  The usage pattern is to hook up controls in __init__ of a subclass.  When that screen is created, it registers controls on its keyboard and mouse handler; when the screen becomes the top of the ScreenStack, it responds to them.
 """
 
 	def __init__(self):

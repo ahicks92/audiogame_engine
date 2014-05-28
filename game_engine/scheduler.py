@@ -1,5 +1,8 @@
 
 class Scheduler(object):
+	"""A scheduler.  Add this to your screen with register_ticker and make sure to call super(Screen, self).tick(delta).
+
+This runs in local time, that is if tick doesn't get called, it will not count down to the next event.  If you make a pause screen and push it on top of the stack, then the schedulers in screens below it stop-as they should."""
 
 	def __init__(self):
 		self.tasks = set()
