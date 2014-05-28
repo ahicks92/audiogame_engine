@@ -18,3 +18,13 @@
 
 	This package has been used in two projects, neither of which is currently released.  The first is i3d, a 3D space invaders using Camlorn_audio.  The second is my as-yet-unnamed attempt to create an online MMO, which you may read about on my [blog](http://camlorn/net/).
 For those looking to do networking, this package's main loop features the required places to hook a Twisted `_threadedselect`, [here](http://twistedmatrix.com/documents/current/api/twisted.internet._threadedselect.html).  It is also capable of being monkeypatched by Gevent safely.	
+
+##Instalation##
+
+Steps:
+
+- Clone this repository somewhere.  Anywhere will do.
+
+- Instal Pip if you don't have it.  If you are going to be spending more than 5 minutes with Python, you want Pip: it can download packages and their requirements for you with commands like `pip install foo`.  A guide is [here](http://pip.readthedocs.org/en/latest/installing.html).
+
+- Switch to the directory of this repository, and execute the following two commands: `pip install -r requirements.txt` and `python setup.py install`.  The first grabs all dependencies and instals them; the second installs this package.  If both succeed, you're done.
