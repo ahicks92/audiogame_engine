@@ -19,7 +19,8 @@ The pygame audio mixer should also work well enough for those who need only pan 
 For those who do not mind being completely open-source and GPL, I fully recommend [Pyo](http://ajaxsoundstudio.com/software/pyo/): Pyo is crazy awesome once you learn it, supports every effect under the sun, but you won't be able to go commercial and, as per the GPL, need to publish your sourcecode.  If you couple it with [Headspace](https://github.com/crabl/HeadSpace), you get limited 3D HRTF support.  The downside to Pyo and Headspace is that both are actually quite slow: Pyo does everything needed for a game but is actually aimed at synthesis research, so it sacrifices speed for flexibility, and headspace is performing a very, very expensive algorithm on top of it.
 The upshot is that getting 3D audio and high quality reverb for all your sounds is hard, but getting plane old panning for all your sounds isn't a big deal.  I am working on a successor that combines the best of all of these packages, hopefully without the problems, but this is still a ways from completion.
 
-	This package has been used in two projects, neither of which is currently released.  The first is i3d, a 3D space invaders using Camlorn_audio.  The second is my as-yet-unnamed attempt to create an online MMO, which you may read about on my [blog](http://camlorn.net/).
+	This package has been used in two projects, neither of which is currently released.  The first is i3d, a 3D space invaders using Camlorn_audio.  The second is my as-yet-unnamed attempt to create an online MMO, which you may read about on my [blog.](http://camlorn.net/)
+
 For those looking to do networking, this package's main loop features the required places to hook a Twisted _threadedselect, [here](http://twistedmatrix.com/documents/current/api/twisted.internet._threadedselect.html).  It is also capable of being monkeypatched by Gevent safely.	
 
 ##Installation##
