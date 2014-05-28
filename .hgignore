@@ -5,4 +5,4 @@ __pycache__
 dist
 build
 release
-game_engine.egg-info
+audiogame_engine.egg-info

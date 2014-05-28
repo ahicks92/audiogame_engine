@@ -1,0 +1,1 @@
+hg+http://hg.q-continuum.net/resource_finder/
