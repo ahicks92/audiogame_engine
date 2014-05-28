@@ -2,6 +2,8 @@
 
 	Audiogame_engine provides input and windowing functionality for Audiogame developers through the Python programming language, Sdl, and Pysdl2.  While graphics is not currently supported, adding such is trivial and I will welcome such patches.  This package is aimed at intermediate programmers and I request that you report issues through Github, not through e-mailing me directly (questions are welcome in my e-mail, just not feature requests and bug reports).
 
+	Note: due to the difficultuy of compiling and setting up SDL, a compiled dll is part of this package.  If you are on Linux or Mac, you will need to replace it with a version of SDL compiled for your platform, and possibly update __init__.py to point to it.  The precompiled version which was published as of this release did not include Alt+F4 support; getting Alt+F4 to work requires building SDL yourself so I went ahead and did it for you.
+
 	Unlike other approaches, Audiogame_engine functions via telling you about things.  The code is well-documented.  Start with main_loop.py, screen_stack.py, and screen.py.  Almost everything has a python docstring telling you what it's for and how to use it. The code is also simple: someone who understands why this package might be attractive should be able to understand exactly how it works.
 
 	Typical usage involves overriding `tick` in a subclass of `Screen`, adding it to a `ScreenStack`, and initializing and starting a MainLoop with said `ScreenStack`.  Keyboard and mouse (save for mouse movement) is handled through `KeyboardHandler` and `MouseHandler`.  Every subclass of `Screen` gets one of these.  When a key or mouse button is pressed and a callback is registered for it, the callback gets called.
