@@ -1,2 +1,2 @@
-hg+http://hg.q-continuum.net/resource_finder/
+hg+http://hg.q-continuum.net/resource_finder#egg=resource_finder
 pysdl2
